@@ -195,6 +195,7 @@ pub async fn connect_tcp<Ws: WithSocket>(
         use tokio::net::TcpStream;
 
         let stream = TcpStream::connect((host, port)).await?;
+        stream.set_nodelay(true)?;
 
         return Ok(with_socket.with_socket(stream));
     }
